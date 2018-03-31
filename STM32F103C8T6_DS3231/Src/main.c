@@ -51,6 +51,7 @@
 #include "fatfs.h"
 #include "usb_device.h"
 
+
 /* USER CODE BEGIN Includes */
 #define DS3231_ADD 0x68
 /* USER CODE END Includes */
@@ -63,6 +64,7 @@ DMA_HandleTypeDef hdma_i2c1_rx;
 uint8_t receive_Data[7];
 uint8_t send_Data[7]; //thoi gian cai dat xuong cho ds3231
 uint8_t Second,Minute,Hour,Day,Date,Month,Year;
+volatile uint8_t DS3231_Complete=0;
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -119,9 +121,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	HAL_I2C_Mem_Read_DMA(&hi2c1,DS3231_ADD<<1,0,I2C_MEMADD_SIZE_8BIT,receive_Data,7);
   while (1)
   {
-		HAL_I2C_Mem_Read_DMA(&hi2c1,DS3231_ADD<<1,0,I2C_MEMADD_SIZE_8BIT,receive_Data,7);
+		
+	if(DS3231_Complete){HAL_I2C_Mem_Read_DMA(&hi2c1,DS3231_ADD<<1,0,I2C_MEMADD_SIZE_8BIT,receive_Data,7);DS3231_Complete=0;}
 		
   /* USER CODE END WHILE */
 
@@ -158,6 +162,7 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 		Date=BCD2DEC(receive_Data[4]);
 		Month=BCD2DEC(receive_Data[5]);
 		Year=BCD2DEC(receive_Data[6]);
+		DS3231_Complete=1;
 	}
 		
 }
