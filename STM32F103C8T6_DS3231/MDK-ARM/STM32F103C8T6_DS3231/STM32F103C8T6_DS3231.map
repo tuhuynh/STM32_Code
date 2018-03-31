@@ -752,7 +752,7 @@ Removing Unused input sections from the image.
     Removing main.o(.rev16_text), (4 bytes).
     Removing main.o(.revsh_text), (4 bytes).
     Removing main.o(.rrx_text), (6 bytes).
-    Removing main.o(i.BCD2DEC), (16 bytes).
+    Removing main.o(i.BCD2DEC), (18 bytes).
     Removing main.o(i.DEC2BCD), (22 bytes).
     Removing main.o(.data), (7 bytes).
     Removing usbd_desc.o(.rev16_text), (4 bytes).
@@ -1004,7 +1004,7 @@ Removing Unused input sections from the image.
     Removing stm32f1xx_hal_gpio_ex.o(i.HAL_GPIOEx_DisableEventout), (16 bytes).
     Removing stm32f1xx_hal_gpio_ex.o(i.HAL_GPIOEx_EnableEventout), (16 bytes).
 
-357 unused section(s) (total 23045 bytes) removed from the image.
+357 unused section(s) (total 23047 bytes) removed from the image.
 
 ==============================================================================
 

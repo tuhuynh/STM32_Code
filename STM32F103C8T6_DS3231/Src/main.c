@@ -122,6 +122,7 @@ int main(void)
   while (1)
   {
 		HAL_I2C_Mem_Read_DMA(&hi2c1,DS3231_ADD<<1,0,I2C_MEMADD_SIZE_8BIT,receive_Data,7);
+		
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -135,7 +136,7 @@ int main(void)
 */
 uint8_t BCD2DEC(uint8_t BCD_NUMBER)
 {
-	return (BCD_NUMBER>>4)*10+BCD_NUMBER&0xf;
+	return (BCD_NUMBER>>4)*10+(BCD_NUMBER&0xf);
 }
 /** Hàm chuyển đổi giá trị thập phân sang số BCD 
 ***DEC_NUMBER số <100
@@ -158,6 +159,7 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 		Month=BCD2DEC(receive_Data[5]);
 		Year=BCD2DEC(receive_Data[6]);
 	}
+		
 }
 /** System Clock Configuration
 */
